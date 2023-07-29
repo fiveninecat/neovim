@@ -14,7 +14,7 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 # ask if the user has already run the system.sh and user.sh scripts and save response
-read -p "Have you already installed gcc, git, and neovim? (y/N) " sys_res
+read -p "Have you installed gcc, gcc-c++, git, and neovim? (y/N) " sys_res
 
 # convert reponse to lowercase
 sys_res=$(echo $sys_res | tr '[:upper:]' '[:lower:]')
