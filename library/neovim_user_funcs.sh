@@ -3,11 +3,19 @@
 # These functions are designed to be run without sudo.
 # For the color variables to work, the script that sources this file must also source the file which defines the color variables.
 
+# Check if the current user is the superuser, and if so, exit.
+check_user () {
+    if [ "$(id -u)" -eq 0 ]; then
+        echo -e "${RED}Please run without sudo.${ENDCOLOR}" >&2
+        exit 1
+    fi
+}
+
 # Configure Neovim.
 configure_neovim () {
 
     # Save the destination directory to a variable.
-    NEOVIM_CF_DIR="/home/$USER/.config/nvim/lua/satellite"
+    NEOVIM_CF_DIR="/home/$USER/.config/nvim/lua/fiveninecat"
 
     # Create the destination directory if necessary.
     if [ ! -d $NEOVIM_CF_DIR ]; then
@@ -26,7 +34,7 @@ configure_neovim () {
 
         # Create primary init.lua file.
         echo "Creating primary init.lua file."
-        echo "require(\"satellite\")" > /home/$USER/.config/nvim/init.lua
+        echo "require(\"fiveninecat\")" > /home/$USER/.config/nvim/init.lua
         [ "$?" -eq 0 ] && echo -e "${GREEN}Success!${ENDCOLOR}\n" || echo -e "${RED}Something went wrong.${ENDCOLOR}\n"
 
     # If $NEOVIM_CF_DIR is not empty, ask the user if they would like to replace the existing files, and save the response to a variable.
@@ -52,7 +60,7 @@ echo -e "${YELLOW}Ok, skipping this step.${ENDCOLOR}\n"
 
             # Create primary init.lua file.
             echo "Creating primary init.lua file."
-            echo "require(\"satellite\")" > ~/.config/nvim/init.lua
+            echo "require(\"fiveninecat\")" > ~/.config/nvim/init.lua
             [ "$?" -eq 0 ] && echo -e "${GREEN}Success!${ENDCOLOR}\n" || echo -e "${RED}Something went wrong.${ENDCOLOR}\n"
 
         # If the response is anything other than "y", "yes", or NULL, do not replace the existing files.

@@ -1,3 +1,3 @@
-require("satellite.settings")
-require("satellite.packer")
-require("satellite.remap")
+require("fiveninecat.settings")
+require("fiveninecat.packer")
+require("fiveninecat.remap")
